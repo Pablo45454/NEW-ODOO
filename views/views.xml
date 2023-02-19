@@ -1,0 +1,72 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="warrior.list">
+      <field name="name">warrior list</field>
+      <field name="model">warrior.player</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="warrior.action_window">
+      <field name="name">warrior window</field>
+      <field name="res_model">warrior.player</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="warrior.clase_window">
+      <field name="name">clases window</field>
+      <field name="res_model">warrior.clase</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="warrior.weapon_window">
+      <field name="name">clases window</field>
+      <field name="res_model">warrior.arma</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="warrior.action_server">
+      <field name="name">warrior server</field>
+      <field name="model_id" ref="model_warrior_warrior"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="Warrior" id="warrior.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Menu" id="warrior.menu_1" parent="warrior.menu_root"/>
+<!--    <menuitem name="Menu 2" id="warrior.menu_2" parent="warrior.menu_root"/>
+-->
+    <!-- actions -->
+
+    <menuitem name="Players" id="warrior.menu_1_list" parent="warrior.menu_1"
+              action="warrior.action_window"/>
+    <menuitem name="Clase" id="warrior.menu_clase" parent="warrior.menu_1"
+              action="warrior.clase_window"/>
+    <menuitem name="Armas" id="warrior.menu_weapon" parent="warrior.menu_1"
+              action="warrior.weapon_window"/>
+<!--    <menuitem name="Server to list" id="warrior" parent="warrior.menu_2"
+              action="warrior.action_server"/>
+-->
+  </data>
+</odoo>

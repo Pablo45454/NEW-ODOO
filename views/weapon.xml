@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="warrior.weapon_tree">
+      <field name="name">warrior weapon</field>
+      <field name="model">warrior.arma</field>
+      <field name="arch" type="xml">
+        <tree>
+
+                <field name="avatar" widget="image" width="50px" height="50px"/>
+                <field name="name"/>
+                <field name="damage"/>
+                <field name="afinidad"/>
+
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.weapon_form">
+      <field name="name">warrior armas</field>
+      <field name="model">warrior.arma</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+          <group>
+          <field name="avatar" widget="image"/>
+          <field name="name"/>
+          <field name="damage"/>
+            <field name="afinidad"/>
+            <field name="precio"/>
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    </data>
+</odoo>

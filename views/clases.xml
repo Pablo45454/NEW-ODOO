@@ -1,0 +1,38 @@
+<odoo>
+    <data>
+
+       <record model="ir.ui.view" id="warrior.list_clase">
+      <field name="name">warrior clases</field>
+      <field name="model">warrior.clase</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+          <group>
+          <field name="avatar" widget="image"/>
+          <field name="name"/>
+          <field name="hp"/>
+          <field name="fuerza"/>
+          <field name="destreza"/>
+          <field name="armadura"/>
+
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.clase_tree">
+      <field name="name">warrior clase</field>
+      <field name="model">warrior.clase</field>
+      <field name="arch" type="xml">
+        <tree>
+
+        <field name="avatar" widget="image" width="50px" height="50px"/>
+        <field name="name"/>
+
+        </tree>
+      </field>
+    </record>
+
+    </data>
+</odoo>

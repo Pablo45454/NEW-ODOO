@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_warrior_player,warrior.player,model_warrior_player,base.group_user,1,1,1,1
+access_warrior_clase,warrior.clase,model_warrior_clase,base.group_user,1,1,1,1
+access_warrior_arma,warrior.arma,model_warrior_arma,base.group_user,1,1,1,1
