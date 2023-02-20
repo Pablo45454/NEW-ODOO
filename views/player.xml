@@ -1,0 +1,115 @@
+<odoo>
+    <data>
+
+      <record model="ir.ui.view" id="warrior.player_tree">
+        <field name="name">warrior player</field>
+        <field name="model">warrior.player</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="nivel>98">
+                    <field name="avatar" widget="image" width="50px" height="50px"/>
+                    <field name="name"/>
+                    <field name="nivel"/>
+                    <field name="clase"/>
+            </tree>
+        </field>
+      </record>
+
+      <record model="ir.ui.view" id="warrior.player_form">
+          <field name="name">player list</field>
+          <field name="model">warrior.player</field>
+          <field name="arch" type="xml">
+            <form>
+
+              <sheet>
+
+              <group>
+
+
+
+                <group>
+
+                    <field name="avatar" widget="image"/>
+                    <field  name="name"/>
+                    <field name="password" password="True"/>
+                    <button name="aumentar_nivel" type="object" string="Increase lvl"/>
+                    <button name="disminuir_nivel" type="object" string="Decrease lvl"/>
+                    <field name="nivel"/>
+                    <field name="xp"/>
+                    <field name="xp_required"/>
+
+
+                </group>
+                <group>
+
+                  <field name="clase"/>
+                  <field name="avatar_clase" widget="image" string="Avatar Clase"/>
+                  <field name="hp"/>
+                  <field name="fuerza"/>
+                  <field name="destreza"/>
+                  <field name="armadura"/>
+
+                </group>
+
+              </group>
+
+                 <notebook>
+                  <page string="Arma">
+                      <group>
+                  <field name="arma"/>
+
+                        <field name="arma_avatar" widget="image"/>
+                        <field name="arma_name"/>
+                        <field name="arma_precio"/>
+                        <field name="arma_damage"/>
+                        <field name="arma_afinidad"/>
+
+                        </group>
+                  </page>
+
+                  <page string="Tienda">
+                    <field name="tienda" mode="kanban">
+                        <kanban>
+                      <field name="id"/>
+                      <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill" >
+                                 <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block "
+                                                         t-attf-style="background-image:url('#{kanban_image('warrior.arma', 'avatar', record.id.value, placeholder)}')">
+                                                    </div>
+                                    <div class="oe_kanban_details d-flex flex-column" >
+                                        <a type="open">
+                                            <h3 class="o_kanban_record_title oe_partner_heading">
+                                                <field name="name"/>
+                                            </h3>
+                                        </a>
+                                        <ul>
+                                            <li>Damage:
+                                                <field name="damage"/>
+                                            </li>
+                                            <li>Afinidad:
+                                                <field name="afinidad"/>
+                                            </li>
+                                            <li>Precio:
+                                                <field name="precio"/>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                        </t>
+                    </templates>
+                </kanban>
+
+                    </field>
+
+                  </page>
+
+                </notebook>
+              </sheet>
+            </form>
+          </field>
+      </record>
+
+    </data>
+</odoo>

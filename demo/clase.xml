@@ -2017,7 +2017,7 @@ AAAAAElFTkSuQmCC
               <field name="destreza">35</field>
               <field name="armadura">20</field>
           </record>
-<!--
+
 <record id="warrior.clase_guerrero" model="warrior.clase">
 
               <field name="avatar">iVBORw0KGgoAAAANSUhEUgAAAfkAAAHuCAYAAACcZXXHAAEAAElEQVR4XuydB5xcVfn3b3rvnQAh
@@ -3473,7 +3473,7 @@ P817/8WXXYFBAAAAAElFTkSuQmCC
               <field name="destreza">20</field>
               <field name="armadura">25</field>
           </record>
--->
+
 <record id="warrior.clase_bandido" model="warrior.clase">
 
               <field name="avatar">iVBORw0KGgoAAAANSUhEUgAAAWgAAAH4CAYAAABng3eWAAEAAElEQVR4Xuz9B5xdeVreif/ODZVz

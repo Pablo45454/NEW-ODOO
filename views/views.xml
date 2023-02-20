@@ -2,15 +2,7 @@
   <data>
     <!-- explicit list view definition -->
 
-    <record model="ir.ui.view" id="warrior.list">
-      <field name="name">warrior list</field>
-      <field name="model">warrior.player</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-        </tree>
-      </field>
-    </record>
+
 
 
     <!-- actions opening views on models -->
@@ -18,7 +10,7 @@
     <record model="ir.actions.act_window" id="warrior.action_window">
       <field name="name">warrior window</field>
       <field name="res_model">warrior.player</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,kanban</field>
     </record>
 
     <record model="ir.actions.act_window" id="warrior.clase_window">
@@ -30,7 +22,7 @@
     <record model="ir.actions.act_window" id="warrior.weapon_window">
       <field name="name">clases window</field>
       <field name="res_model">warrior.arma</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,kanban</field>
     </record>
     <!-- server action to the one above -->
 <!--

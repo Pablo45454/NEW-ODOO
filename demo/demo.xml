@@ -1,6 +1,6 @@
 <odoo>
     <data>
-
+<!--
 <record id="warrior_player_manolin" model="warrior.player">
             <field name="name">maniiii</field>
           </record>
@@ -8,7 +8,7 @@
 <record id="warrior_player_estuardo" model="warrior.player">
             <field name="name">soyboy</field>
           </record>
-<!--
+
           <record id="object1" model="warrior.warrior">
             <field name="name">Object 1</field>
             <field name="value">10</field>
