@@ -32,7 +32,12 @@ class player(models.Model):
     arma_damage = fields.Integer(related="arma.damage")
     arma_afinidad = fields.Selection(related="arma.afinidad")
 
-    tienda = fields.Many2one("warrior.arma")
+    tienda = fields.Many2many("warrior.arma", compute="_get_armas")
+
+    def _get_armas(self):
+        for s in self:
+            s.tienda = s.env['warrior.arma'].search([])
+
 
     def aumentar_nivel(self):
         for s in self:
