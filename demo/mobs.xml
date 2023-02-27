@@ -1,6 +1,6 @@
 <odoo>
     <data>
-        <!--
+
         <record id="mob_demonio_sangre" model="warrior.mob">
             <field name="avatar">iVBORw0KGgoAAAANSUhEUgAAAgYAAAHiCAMAAACk3PSbAAAAY1BMVEVHcEwgFRcBAAAhFBYdEhUq
 HR4RDAwdFhYgFRctHRwRCgsKBgYVEBAnIiEaFhUPCAcFAAArJiZORkU+OjoJBgYaFBIxHBgpJyZL
@@ -1129,7 +1129,7 @@ AAAASUVORK5CYII=</field>
             <field name="hp">1200</field>
             <field name="damage">100</field>
             <field name="armadura">60</field>
-            <field></field>
-        </record>-->
+            <field name="zona" ref="zona_abismo"></field>
+        </record>
     </data>
 </odoo>

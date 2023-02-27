@@ -8,6 +8,7 @@
          <tree>
                 <field name="avatar" widget="image" width="100px" height="100px"/>
                 <field name="name"/>
+                <field name="zona"/>
         </tree>
       </field>
     </record>
@@ -24,6 +25,7 @@
           <field name="hp"/>
           <field name="damage"/>
           <field name="armadura"/>
+          <field name="zona"/>
           </group>
           </sheet>
         </form>
@@ -58,6 +60,9 @@
                                             </li>
                                             <li>Armadura:
                                                 <field name="armadura"/>
+                                            </li>
+                                            <li>Zona:
+                                                <field name="zona"/>
                                             </li>
                                         </ul>
                                     </div>

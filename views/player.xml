@@ -29,8 +29,8 @@
                                             <li>Clase:
                                                 <field name="clase"/>
                                             </li>
-                                            <li>
-                                                <field name="clase"/>
+                                            <li>Zona:
+                                                <field name="zona"/>
                                             </li>
                                         </ul>
                                     </div>
@@ -50,6 +50,7 @@
                     <field name="name"/>
                     <field name="nivel"/>
                     <field name="clase"/>
+                    <field name="zona"/>
             </tree>
         </field>
       </record>
@@ -76,7 +77,7 @@
                     <field name="nivel"/>
                     <field name="xp"/>
                     <field name="xp_required"/>
-
+                    <field name="zona"/>
 
                 </group>
                 <group>

@@ -35,7 +35,7 @@ class player(models.Model):
 
     tienda = fields.Many2many("warrior.arma", compute="_get_armas")
 
-
+    zona = fields.Many2one("warrior.zona")
 
     @api.constrains('nivel')
     def _get_damage(self):
@@ -144,5 +144,6 @@ class mob(models.Model):
     hp = fields.Integer()
     damage = fields.Integer()
     armadura = fields.Integer()
+    zona = fields.Many2one("warrior.zona")
 
 
