@@ -1,6 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_warrior_player,warrior.player,model_warrior_player,base.group_user,1,1,1,1
 access_warrior_clase,warrior.clase,model_warrior_clase,base.group_user,1,1,1,1
 access_warrior_arma,warrior.arma,model_warrior_arma,base.group_user,1,1,1,1
 access_warrior_zona,warrior.zona,model_warrior_zona,base.group_user,1,1,1,1
 access_warrior_mob,warrior.mob,model_warrior_mob,base.group_user,1,1,1,1
+access_warrior_player_wizard,warrior.player_wizard,model_warrior_player_wizard,base.group_user,1,1,1,1
+access_warrior_battle_wizard,warrior.battle_wizard,model_warrior_battle_wizard,base.group_user,1,1,1,1

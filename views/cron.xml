@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+    <record model="ir.cron" forcecreate="True" id="warrior.cron_give_xp">
+            <field name="name">Game: Give Exp</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="state">code</field>
+            <field name="code">model.give_xp()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="activity_user_type">specific</field>
+            <field name="doall" eval="False" />
+        </record>
+    </data>
+</odoo>

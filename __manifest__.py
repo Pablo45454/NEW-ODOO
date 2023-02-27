@@ -21,6 +21,7 @@
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
+    'depends': ['mail'],
 
     # always loaded
     'data': [
@@ -32,6 +33,7 @@
         'views/player.xml',
         'views/zona.xml',
         'views/mob.xml',
+        'views/cron.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

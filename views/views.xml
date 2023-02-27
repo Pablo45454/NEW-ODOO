@@ -9,8 +9,11 @@
 
     <record model="ir.actions.act_window" id="warrior.action_window">
       <field name="name">warrior window</field>
-      <field name="res_model">warrior.player</field>
-      <field name="view_mode">tree,form,kanban</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('warrior.player_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('warrior.player_form')}),]" />
+      <field name="view_mode">tree,form,kanban,calendar,search</field>
     </record>
 
     <record model="ir.actions.act_window" id="warrior.clase_window">

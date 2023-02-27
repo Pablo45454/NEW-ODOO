@@ -1,8 +1,40 @@
 <odoo>
     <data>
+      <record model="ir.ui.view" id="warrior.player_wizard_form">
+            <field name="name">warrior player wizard</field>
+            <field name="model">warrior.player_wizard</field>
+            <field name="arch" type="xml">
+                <form>
+
+                        <group>
+                            <field name="avatar" widget="image"/>
+                            <field name="name"/>
+                            <field name="password" password="True"/>
+                            <field name="is_player"/>
+                            <field name="clase"/>
+                        </group>
+
+                     <footer>
+                        <button name="create_player" type="object"
+                                string="Create" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="warrior.player_wizard_action" model="ir.actions.act_window">
+            <field name="name">Create Player</field>
+            <field name="res_model">warrior.player_wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="base.model_res_partner"/>
+        </record>
+
       <record model="ir.ui.view" id="warrior.player_kanban_view">
             <field name="name">Player</field>
-            <field name="model">warrior.player</field>
+            <field name="model">res.partner</field>
             <field name="arch" type="xml">
                 <kanban>
                   <field name="id"/>
@@ -11,7 +43,7 @@
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill" >
                                  <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block "
-                                                         t-attf-style="background-image:url('#{kanban_image('warrior.player', 'avatar', record.id.value, placeholder)}')">
+                                                         t-attf-style="background-image:url('#{kanban_image('res.partner', 'avatar', record.id.value, placeholder)}')">
                                                     </div>
                                     <div class="oe_kanban_details d-flex flex-column" >
                                         <a type="open">
@@ -39,11 +71,27 @@
                     </templates>
                 </kanban>
             </field>
-        </record>
+      </record>
+
+      <record model="ir.ui.view" id="warrior.player_search">
+      <field name="name">player search</field>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+              <search string="Player Name">
+                  <field name="name"></field>
+                  <field name="clase"></field>
+                  <filter name="max_lvl" string="Nivel máximo" domain="[('nivel','=',99)]"/>
+                  <filter name="experienced_lvl" string="Jugadores Experimentados" domain="[('nivel','>',60)]"/>
+                  <filter name="group_by_clase" string="Clase" context="{'group_by': 'clase'}"/>
+                  <filter name="group_by_zona" string="Zona" context="{'group_by': 'zona'}"/>
+                  <filter name="player_partner" string="Is Player" domain="[('is_player','=',True)]" />
+              </search>
+      </field>
+    </record>
 
       <record model="ir.ui.view" id="warrior.player_tree">
         <field name="name">warrior player</field>
-        <field name="model">warrior.player</field>
+        <field name="model">res.partner</field>
         <field name="arch" type="xml">
             <tree decoration-danger="nivel>98">
                     <field name="avatar" widget="image" width="50px" height="50px"/>
@@ -55,18 +103,25 @@
         </field>
       </record>
 
+      <record model="ir.ui.view" id="warrior.player_calendar">
+            <field name="name">Player Calendar</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <calendar string="Session Calendar" date_start="fecha"
+                          date_stop="fecha"
+                          >
+                    <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+
       <record model="ir.ui.view" id="warrior.player_form">
           <field name="name">player list</field>
-          <field name="model">warrior.player</field>
+          <field name="model">res.partner</field>
           <field name="arch" type="xml">
             <form>
-
               <sheet>
-
               <group>
-
-
-
                 <group>
 
                     <field name="avatar" widget="image"/>
@@ -74,12 +129,16 @@
                     <field name="password" password="True"/>
                     <button name="aumentar_nivel" type="object" string="Increase lvl"/>
                     <button name="disminuir_nivel" type="object" string="Decrease lvl"/>
+                    <button name="dame_xp" type="object" string="Dar Experiencia"/>
                     <field name="nivel"/>
                     <field name="xp"/>
                     <field name="xp_required"/>
                     <field name="zona"/>
-
+                    <field name="is_player"/>
+                    <field name="fecha"/>
+                    <button name="generate_fight" type="object" string="Batalla con Jugador" class="oe_highlight" /><field name="comentario"/>
                 </group>
+
                 <group>
 
                   <field name="clase"/>
@@ -89,11 +148,11 @@
                   <field name="destreza"/>
                   <field name="armadura"/>
                   <field name="damage"/>
+
                 </group>
-
               </group>
-
                  <notebook>
+
                   <page string="Arma">
                       <group>
                   <field name="arma"/>
@@ -148,12 +207,45 @@
                     </field>
 
                   </page>
+                    <page string="Localización">
+                      <group>
 
+
+                        <field name="zona_avatar" widget="image"/>
+                        <field name="zona_name"/>
+                        <field name="zona_dificultad"/>
+
+
+                        </group>
+                  </page>
                 </notebook>
               </sheet>
             </form>
           </field>
       </record>
+         <record model="ir.ui.view" id="warrior.battle_wizard">
+            <field name="name">warrior wizard</field>
+            <field name="model">warrior.battle_wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
 
+                    </header>
+                    <sheet>
+                <group>
+                    <field name="player1" />
+                    <field name="player2" />
+
+
+                </group>
+                  <footer>
+                        <button name="battle_player" type="object"
+                                string="Iniciar Batalla" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                    </sheet>
+                </form>
+            </field>
+            </record>
     </data>
 </odoo>
