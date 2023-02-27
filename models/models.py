@@ -15,6 +15,7 @@ class player(models.Model):
     fuerza = fields.Integer(compute="_get_fuerza")
     destreza = fields.Integer(compute="_get_destreza")
     avatar = fields.Image(max_width=200,max_height=360)
+    damage = fields.Integer(compute="_get_damage", default=0)
 
     def _first_weapon(self):
         return self.env['warrior.arma'].search([])[6]
@@ -33,6 +34,20 @@ class player(models.Model):
     arma_afinidad = fields.Selection(related="arma.afinidad")
 
     tienda = fields.Many2many("warrior.arma", compute="_get_armas")
+
+
+
+    @api.constrains('nivel')
+    def _get_damage(self):
+        for s in self:
+            if s.arma.afinidad == "1":
+                s.damage = s.arma.damage + s.fuerza
+            if s.arma.afinidad == "2":
+                s.damage = s.arma.damage + s.destreza
+            if s.arma.afinidad == "3":
+                s.damage = s.arma.damage + s.fuerza + s.destreza
+            if s.arma.afinidad == "4":
+                s.damage = s.arma.damage
 
     def _get_armas(self):
         for s in self:
@@ -104,3 +119,30 @@ class arma(models.Model):
     avatar = fields.Image(max_width=100, max_height=100)
     afinidad = fields.Selection([('1', 'Fuerza'), ('2', 'Destreza'), ('3', 'Ambos'), ('4', 'Ninguna')])
     precio = fields.Integer()
+
+    def comprar_arma(self):
+            for s in self:
+                player_id = self.env['warrior.player'].browse(self._context.get('active_id'))
+                player_id.arma = s.id
+                print(self.env.context['active_id'])
+
+
+class zona(models.Model):
+    _name = 'warrior.zona'
+    _description = 'Zona'
+
+    name = fields.Char(required=True)
+    avatar = fields.Image(max_width=300, max_height=200)
+    dificultad = fields.Selection([('1', 'Principiante'), ('2', 'Intermedio'), ('3', 'Avanzado'), ('4', 'Experimentado'), ('5', 'Leyenda')])
+
+class mob(models.Model):
+    _name = 'warrior.mob'
+    _description = 'Mob'
+
+    name = fields.Char(required=True)
+    avatar = fields.Image(max_width=300, max_height=200)
+    hp = fields.Integer()
+    damage = fields.Integer()
+    armadura = fields.Integer()
+
+

@@ -1,5 +1,45 @@
 <odoo>
     <data>
+      <record model="ir.ui.view" id="warrior.player_kanban_view">
+            <field name="name">Player</field>
+            <field name="model">warrior.player</field>
+            <field name="arch" type="xml">
+                <kanban>
+                  <field name="id"/>
+                  <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill" >
+                                 <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block "
+                                                         t-attf-style="background-image:url('#{kanban_image('warrior.player', 'avatar', record.id.value, placeholder)}')">
+                                                    </div>
+                                    <div class="oe_kanban_details d-flex flex-column" >
+                                        <a type="open">
+                                            <h3 class="o_kanban_record_title oe_partner_heading">
+                                                <field name="name"/>
+                                            </h3>
+                                        </a>
+                                        <ul>
+                                            <li>Nivel:
+                                                <field name="nivel"/>
+                                            </li>
+                                            <li>Xp:
+                                                <field name="xp"/>
+                                            </li>
+                                            <li>Clase:
+                                                <field name="clase"/>
+                                            </li>
+                                            <li>
+                                                <field name="clase"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
 
       <record model="ir.ui.view" id="warrior.player_tree">
         <field name="name">warrior player</field>
@@ -47,7 +87,7 @@
                   <field name="fuerza"/>
                   <field name="destreza"/>
                   <field name="armadura"/>
-
+                  <field name="damage"/>
                 </group>
 
               </group>
@@ -93,8 +133,11 @@
                                             <li>Precio:
                                                 <field name="precio"/>
                                             </li>
-
+                                            <li>
+                                                <button name="comprar_arma" type="object" string="Comprar" context="{'active_id':parent.id}">Comprar</button>
+                                            </li>
                                         </ul>
+
                                     </div>
                                 </div>
                         </t>

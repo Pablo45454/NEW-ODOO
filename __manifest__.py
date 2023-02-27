@@ -30,11 +30,15 @@
         'views/clases.xml',
         'views/weapon.xml',
         'views/player.xml',
+        'views/zona.xml',
+        'views/mob.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
         'demo/clase.xml',
         'demo/weapons.xml',
+        'demo/zonas.xml',
+        'demo/mobs.xml',
     ],
 }

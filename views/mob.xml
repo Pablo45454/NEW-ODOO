@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="warrior.mob_tree">
+      <field name="name">warrior mob</field>
+      <field name="model">warrior.mob</field>
+      <field name="arch" type="xml">
+         <tree>
+                <field name="avatar" widget="image" width="100px" height="100px"/>
+                <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.mob_form">
+      <field name="name">warrior mobs</field>
+      <field name="model">warrior.mob</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+          <group>
+          <field name="avatar" widget="image"/>
+          <field name="name"/>
+          <field name="hp"/>
+          <field name="damage"/>
+          <field name="armadura"/>
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.mob_kanban_view">
+            <field name="name">warrior mob</field>
+            <field name="model">warrior.mob</field>
+            <field name="arch" type="xml">
+                <kanban>
+                  <field name="id"/>
+                  <field name="name"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card o_kanban_record_has_image_fill" >
+                                 <div class="o_kanban_image_fill_left o_kanban_image_full d-none d-md-block "
+                                                         t-attf-style="background-image:url('#{kanban_image('warrior.mob', 'avatar', record.id.value, placeholder)}')">
+                                                    </div>
+                                    <div class="oe_kanban_details d-flex flex-column" >
+                                        <a type="open">
+                                            <h3 class="o_kanban_record_title oe_partner_heading">
+                                                <field name="name"/>
+                                            </h3>
+                                        </a>
+                                        <ul>
+                                            <li>Vida:
+                                                <field name="hp"/>
+                                            </li>
+                                            <li>Daño:
+                                                <field name="damage"/>
+                                            </li>
+                                            <li>Armadura:
+                                                <field name="armadura"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+    </data>
+</odoo>
