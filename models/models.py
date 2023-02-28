@@ -46,6 +46,8 @@ class player(models.Model):
     zona_name = fields.Char(related="zona.name")
     zona_avatar = fields.Image(max_width=120, max_height=80,related="zona.avatar")
     zona_dificultad = fields.Selection(related="zona.dificultad")
+    def _first_zone(self):
+        return self.env['warrior.zona'].search([])[0]
     zona = fields.Many2one("warrior.zona", #default=_first_zone
                            )
 
@@ -96,8 +98,7 @@ class player(models.Model):
         for s in self:
             s.xp += 10000;
 
-    def _first_zone(self):
-        return self.env['warrior.zona'].search([])[0]
+
 
 
 
