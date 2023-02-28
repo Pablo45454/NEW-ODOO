@@ -40,7 +40,7 @@ class player(models.Model):
     arma_damage = fields.Integer(related="arma.damage")
     arma_afinidad = fields.Selection(related="arma.afinidad")
     comentario = fields.Char(default="",readonly="true")
-
+    opinion = fields.Char(default="", readonly="true")
     tienda = fields.Many2many("warrior.arma", compute="_get_armas")
 
     zona_name = fields.Char(related="zona.name")
@@ -82,15 +82,15 @@ class player(models.Model):
     def onchange_arma(self):
         for s in self:
             if s.clase.name == "Bandido":
-                s.write({'comentario': "Clase con buen manejo de armas"})
+                s.write({'opinion': "Clase con buen manejo de armas"})
             if s.clase.name == "Samurai":
-                s.write({'comentario': "Clase con buena destreza"})
+                s.write({'opinion': "Clase con buena destreza"})
             if s.clase.name == "Guerrero":
-                s.write({'comentario': "Clase con buenas estadísticas"})
+                s.write({'opinion': "Clase con buenas estadísticas"})
             if s.clase.name == "Cazador":
-                s.write({'comentario': "Clase con buena destreza pero poca vida"})
+                s.write({'opinion': "Clase con buena destreza pero poca vida"})
             if s.clase.name == "Vikingo":
-                s.write({'comentario': "Clase con buena fuerza y mucha vida"})
+                s.write({'opinion': "Clase con buena fuerza y mucha vida"})
 
 
 

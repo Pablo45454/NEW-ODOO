@@ -176,7 +176,7 @@
                   <field name="destreza"/>
                   <field name="armadura"/>
                   <field name="damage"/>
-
+                  <field name="opinion"/>
                 </group>
               </group>
                  <notebook>
