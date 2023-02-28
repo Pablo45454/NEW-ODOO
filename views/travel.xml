@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+
+       <record model="ir.ui.view" id="warrior.travel_form">
+      <field name="name">warrior travel</field>
+      <field name="model">warrior.travel</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+          <group>
+          <field name="player"/>
+          <field name="zona_origen"/>
+          <field name="zona_destino"/>
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.travel_tree">
+      <field name="name">warrior travel</field>
+      <field name="model">warrior.travel</field>
+      <field name="arch" type="xml">
+        <tree>
+
+
+        <field name="player"/>
+          <field name="zona_origen"/>
+          <field name="zona_destino"/>
+        </tree>
+      </field>
+    </record>
+
+    </data>
+</odoo>

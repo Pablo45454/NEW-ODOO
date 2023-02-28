@@ -10,10 +10,13 @@
     <record model="ir.actions.act_window" id="warrior.action_window">
       <field name="name">warrior window</field>
       <field name="res_model">res.partner</field>
+      <field name="view_mode">tree,form,kanban,calendar,search</field>
+       <field name="domain"></field>
+      <field name="search_view_id" ref="warrior.player_search"></field>
+      <field name="context">{'search_default_player_partner': 1, 'default_is_player': True, }</field>
       <field name="view_ids" eval="[(5, 0, 0),
             (0, 0, {'view_mode': 'tree', 'view_id': ref('warrior.player_tree')}),
             (0, 0, {'view_mode': 'form', 'view_id': ref('warrior.player_form')}),]" />
-      <field name="view_mode">tree,form,kanban,calendar,search</field>
     </record>
 
     <record model="ir.actions.act_window" id="warrior.clase_window">
@@ -43,6 +46,18 @@
     <record model="ir.actions.act_window" id="warrior.battle_window">
       <field name="name">battle window</field>
       <field name="res_model">warrior.battle</field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="warrior.battle_mob_window">
+      <field name="name">battle mob window</field>
+      <field name="res_model">warrior.battle_mob</field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="warrior.travel_window">
+      <field name="name">travel window</field>
+      <field name="res_model">warrior.travel</field>
       <field name="view_mode">tree,form,kanban</field>
     </record>
 
@@ -85,6 +100,10 @@
               action="warrior.mob_window"/>
     <menuitem name="Battles" id="warrior.menu_battle" parent="warrior.menu_1"
               action="warrior.battle_window"/>
+    <menuitem name="Battles Mob" id="warrior.menu_battle_mob" parent="warrior.menu_1"
+              action="warrior.battle_mob_window"/>
+     <menuitem name="Travel" id="warrior.menu_travel" parent="warrior.menu_1"
+              action="warrior.travel_window"/>
 <!--    <menuitem name="Server to list" id="warrior" parent="warrior.menu_2"
               action="warrior.action_server"/>
 -->

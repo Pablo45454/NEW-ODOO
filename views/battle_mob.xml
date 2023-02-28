@@ -1,5 +1,96 @@
 <odoo>
     <data>
 
+
+        <record model="ir.ui.view" id="warrior.player_wizard_form">
+            <field name="name">warrior player mob wizard</field>
+            <field name="model">warrior.battle_mob_wizard</field>
+            <field name="arch" type="xml">
+               <form>
+             <header>
+            <button name="back"
+                    type="object"
+                    string="Back"
+                    class="btn btn-primary"
+
+            ></button>
+            <button name="next"
+                    type="object"
+                    string="Next"
+                    class="btn btn-primary"
+
+            ></button>
+
+            <field name="state" widget="statusbar" />
+          </header>
+          <sheet>
+           <group states="1">
+
+              <field name="player"/>
+
+
+             </group>
+            <group states="2">
+
+              <field name="zona"/>
+
+
+            </group>
+              <group states="3">
+
+              <field name="mob"/>
+
+
+            </group>
+            <group states="4">
+
+              <field name="date_start"/>
+              <field name="date_end"/>
+              <button name="create_battle_mob" type="object" string="Create Battle"/>
+
+            </group>
+            <footer>
+
+                        <button special="cancel" string="Cancel"/>
+            </footer>
+          </sheet>
+        </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="warrior.battle_mob_form">
+          <field name="name">warrior battle mob</field>
+          <field name="model">warrior.battle_mob</field>
+          <field name="arch" type="xml">
+            <form>
+              <sheet>
+              <group>
+              <field name="zona"/>
+              <field name="player"/>
+              <field name="mob"/>
+              <field name="winner"/>
+              <field name="xp_earned"/>
+                  <field name="battle_ended"/>
+              </group>
+              </sheet>
+            </form>
+          </field>
+        </record>
+
+        <record model="ir.ui.view" id="warrior.battle_mob_tree">
+          <field name="name">warrior battle mob</field>
+          <field name="model">warrior.battle_mob</field>
+          <field name="arch" type="xml">
+            <tree>
+
+            <field name="zona"/>
+            <field name="player"/>
+            <field name="mob"/>
+            </tree>
+          </field>
+        </record>
+
+
+
     </data>
 </odoo>

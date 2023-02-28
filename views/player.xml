@@ -24,6 +24,28 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="warrior.travel_wizard_form">
+            <field name="name">warrior travel wizard</field>
+            <field name="model">warrior.travel_wizard</field>
+            <field name="arch" type="xml">
+                <form>
+
+                        <group>
+                            <field name="player"/>
+          <field name="zona_origen"/>
+          <field name="zona_destino"/>
+                        </group>
+
+                     <footer>
+                        <button name="travel_to" type="object"
+                                string="Travel" class="oe_highlight"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
         <record id="warrior.player_wizard_action" model="ir.actions.act_window">
             <field name="name">Create Player</field>
             <field name="res_model">warrior.player_wizard</field>
@@ -115,6 +137,8 @@
             </field>
         </record>
 
+
+
       <record model="ir.ui.view" id="warrior.player_form">
           <field name="name">player list</field>
           <field name="model">res.partner</field>
@@ -136,7 +160,11 @@
                     <field name="zona"/>
                     <field name="is_player"/>
                     <field name="fecha"/>
-                    <button name="generate_fight" type="object" string="Batalla con Jugador" class="oe_highlight" /><field name="comentario"/>
+                    <button name="generate_fight" type="object" string="Batalla con Jugador" class="oe_highlight" />
+                    <field name="comentario" string="Resultado: "/>
+                    <button name="generate_fight_mob" type="object" string="Batalla con Mob" class="oe_highlight" />
+                    <field name="comentario2" string="Resultado: "/>
+                    <button name="generate_travel" type="object" string="Travel" class="oe_highlight" />
                 </group>
 
                 <group>

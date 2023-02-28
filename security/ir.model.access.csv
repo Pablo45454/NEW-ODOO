@@ -8,3 +8,5 @@ access_warrior_battle_wizard,warrior.battle_wizard,model_warrior_battle_wizard,b
 access_warrior_battle,warrior.battle,model_warrior_battle,base.group_user,1,1,1,1
 access_warrior_battle_mob_wizard,warrior.battle_mob_wizard,model_warrior_battle_mob_wizard,base.group_user,1,1,1,1
 access_warrior_battle_mob,warrior.battle_mob,model_warrior_battle_mob,base.group_user,1,1,1,1
+access_warrior_travel,warrior.travel,model_warrior_travel,base.group_user,1,1,1,1
+access_warrior_travel_wizard,warrior.travel_wizard,model_warrior_travel_wizard,base.group_user,1,1,1,1

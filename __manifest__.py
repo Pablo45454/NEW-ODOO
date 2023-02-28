@@ -36,6 +36,7 @@
         'views/cron.xml',
         'views/battle.xml',
         'views/battle_mob.xml',
+        'views/travel.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

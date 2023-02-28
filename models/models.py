@@ -22,6 +22,7 @@ class player(models.Model):
     is_player = fields.Boolean(default="false")
     fecha = fields.Date(default=datetime.now(), readonly="True")
     comentario = fields.Char()
+    comentario2 = fields.Char()
     def _first_weapon(self):
         return self.env['warrior.arma'].search([])[6]
 
@@ -50,6 +51,24 @@ class player(models.Model):
             'type': 'ir.actions.act_window',
             'res_model': 'warrior.battle_wizard',
             'context': {'player_id': self.id},
+            'view_mode': 'form',
+            'view_type': 'form',
+            'target': 'new',
+        }
+    def generate_fight_mob(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'warrior.battle_mob_wizard',
+            'context': {'player_id': self.id,'zona' : self.zona.id},
+            'view_mode': 'form',
+            'view_type': 'form',
+            'target': 'new',
+        }
+    def generate_travel(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'warrior.travel_wizard',
+            'context': {'player_id': self.id,'zona' : self.zona.id},
             'view_mode': 'form',
             'view_type': 'form',
             'target': 'new',
@@ -223,6 +242,40 @@ class mob(models.Model):
     armadura = fields.Integer()
     zona = fields.Many2one("warrior.zona")
 
+class travel(models.Model):
+    _name = 'warrior.travel'
+    _description = 'Travel'
+
+    player = fields.Many2one('res.partner')
+    zona_origen = fields.Many2one('warrior.zona')
+    zona_destino = fields.Many2one('warrior.zona')
+
+class travel_wizard(models.Model):
+    _name = 'warrior.travel_wizard'
+    _description = 'Travel Wizard'
+
+    def _get_player(self):
+        return self.env['res.partner'].search([('id', "=", self.env.context.get('player_id'))])
+
+    def _get_zona(self):
+        return self.env['warrior.zona'].search([('id', "=", self.env.context.get('zona'))])
+
+    zona_origen = fields.Many2one('warrior.zona', default=_get_zona, readonly="true")
+    player = fields.Many2one('res.partner', default=_get_player, readonly="true")
+    zona_destino = fields.Many2one('warrior.zona',domain="[('id', '!=', zona_origen)]")
+
+
+    def travel_to(self):
+        for s in self:
+            s.player.zona = s.zona_destino.id
+            self.env['warrior.travel'].create({
+                'player': s.player.id,
+                'zona_origen': s.zona_origen.id,
+                'zona_destino': s.zona_destino.id,
+            })
+
+
+
 class battle(models.Model):
     _name = 'warrior.battle'
     _description = 'Battle'
@@ -241,14 +294,119 @@ class battle_mob(models.Model):
     mob = fields.Many2one('warrior.mob')
     winner = fields.Char()
     xp_earned = fields.Integer()
+    date_start = fields.Datetime()
+    date_end = fields.Datetime()
+    battle_ended = fields.Boolean(default=False)
+
+    def _get_damage(self, atacante, defensor):
+        dano = random.randint(0,atacante.damage) - defensor.armadura
+        if dano < 0:
+            dano = 0
+        return dano
+    @api.model
+    def do_battle(self):
+        for s in self.search([('battle_ended', "=", False)]):
+            if (s.date_end < fields.Datetime.now()) and not s.battle_ended:
+                print("entra al if")
+                player = s.player
+                mob = s.mob
+                player_hp = player.hp
+                mob_hp = mob.hp
+                xp_earned = 0
+                winner = ""
+
+                while player_hp > 0 and mob_hp > 0:
+                    print("entra while")
+                    # Turno de player
+                    dano = s._get_damage(player, mob)
+                    mob_hp -= dano
+                    print("Vida Mob: " + str(mob_hp))
+                    if mob_hp <= 0:
+                        break
+                    # Turno de mob
+                    dano = s._get_damage(mob, player)
+                    player_hp -= dano
+                    print("Vida Player: " + str(player_hp))
+                if player_hp <= 0:
+                    player.comentario2 = '¡Perdiste!'
+
+                    player.xp -= player.xp / 2
+                    xp_earned -= player.xp / 2
+                    winner = mob.name
+                elif mob_hp <= 0:
+
+                    player.comentario2 = '¡Ganaste!'
+                    player.xp += 100
+                    xp_earned = 100
+                    winner = player.name
+
+                print(winner)
+                print(xp_earned)
+                s.winner = winner
+                s.xp_earned = xp_earned
+                s.battle_ended = True
+            else:
+                print("No battles to launch")
 
 class battle_mob_wizard(models.TransientModel):
     _name = 'warrior.battle_mob_wizard'
     _description = "Wizard batalla Mob"
+    def _get_player(self):
+        return self.env['res.partner'].search([('id', "=", self.env.context.get('player_id'))])
+    def _get_zona(self):
+        return self.env['warrior.zona'].search([('id', "=", self.env.context.get('zona'))])
 
-    zona = fields.Many2one('warrior.zona')
-    player = fields.Many2one('res.partner')
-    mob = fields.Many2one('warrior.mob')
+    zona = fields.Many2one('warrior.zona',default=_get_zona,readonly="true")
+    player = fields.Many2one('res.partner',default=_get_player,readonly="true")
+    mob = fields.Many2one('warrior.mob', domain="[('zona.id','=', zona)]")
+    date_start = fields.Datetime(readonly=True, default=fields.Datetime.now())
+    date_end = fields.Datetime(default=fields.Datetime.now())
+    state = fields.Selection([('1', 'Player'), ('2', 'Zona'), ('3', 'Mob'), ('4', 'Launch')], default='1')
+
+    def back(self):
+        if self.state == '2':
+            self.state = '1'
+        if self.state == '3':
+            self.state = '2'
+        if self.state == '4':
+            self.state = '3'
+        return {
+            'name': 'Create Battle',
+            'type': 'ir.actions.act_window',
+            'res_model': 'warrior.battle_mob_wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'res_id': self.id
+        }
+
+    def next(self):
+
+        if self.state == '2':
+            self.state = '3'
+        if self.state == '1':
+            self.state = '2'
+        if self.state == '3':
+            self.state = '4'
+        return {
+            'name': 'Create Battle',
+            'type': 'ir.actions.act_window',
+            'res_model': 'warrior.battle_mob_wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'res_id': self.id
+        }
+    def create_battle_mob(self):
+        self.ensure_one()
+        self.env['warrior.battle_mob'].create({
+            'player': self.player.id,
+            'zona': self.zona.id,
+            'mob': self.mob.id,
+            'winner': "",
+            'date_start': self.date_start,
+            'date_end': self.date_end,
+            'xp_earned': 0
+        })
+
 
 
 class battle_wizard(models.TransientModel):
