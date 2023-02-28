@@ -11,12 +11,12 @@
       <field name="name">warrior window</field>
       <field name="res_model">res.partner</field>
       <field name="view_mode">tree,form,kanban,calendar,search</field>
-       <field name="domain"></field>
+       <!--<field name="domain"></field>
       <field name="search_view_id" ref="warrior.player_search"></field>
       <field name="context">{'search_default_player_partner': 1, 'default_is_player': True, }</field>
       <field name="view_ids" eval="[(5, 0, 0),
             (0, 0, {'view_mode': 'tree', 'view_id': ref('warrior.player_tree')}),
-            (0, 0, {'view_mode': 'form', 'view_id': ref('warrior.player_form')}),]" />
+            (0, 0, {'view_mode': 'form', 'view_id': ref('warrior.player_form')}),]" />-->
     </record>
 
     <record model="ir.actions.act_window" id="warrior.clase_window">

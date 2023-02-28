@@ -26,7 +26,8 @@ class player(models.Model):
     def _first_weapon(self):
         return self.env['warrior.arma'].search([])[6]
 
-    arma = fields.Many2one("warrior.arma", default=_first_weapon, readonly="True")
+    arma = fields.Many2one("warrior.arma", readonly="True",#default=_first_weapon
+                           )
     clase = fields.Many2one("warrior.clase")
     xp = fields.Integer(default=0)
     armadura = fields.Integer(related="clase.armadura")
@@ -45,6 +46,8 @@ class player(models.Model):
     zona_name = fields.Char(related="zona.name")
     zona_avatar = fields.Image(max_width=120, max_height=80,related="zona.avatar")
     zona_dificultad = fields.Selection(related="zona.dificultad")
+    zona = fields.Many2one("warrior.zona", #default=_first_zone
+                           )
 
     def generate_fight(self):
         return {
@@ -96,7 +99,7 @@ class player(models.Model):
     def _first_zone(self):
         return self.env['warrior.zona'].search([])[0]
 
-    zona = fields.Many2one("warrior.zona", default=_first_zone)
+
 
     @api.constrains('nivel')
     def _get_damage(self):
