@@ -5,3 +5,6 @@ access_warrior_zona,warrior.zona,model_warrior_zona,base.group_user,1,1,1,1
 access_warrior_mob,warrior.mob,model_warrior_mob,base.group_user,1,1,1,1
 access_warrior_player_wizard,warrior.player_wizard,model_warrior_player_wizard,base.group_user,1,1,1,1
 access_warrior_battle_wizard,warrior.battle_wizard,model_warrior_battle_wizard,base.group_user,1,1,1,1
+access_warrior_battle,warrior.battle,model_warrior_battle,base.group_user,1,1,1,1
+access_warrior_battle_mob_wizard,warrior.battle_mob_wizard,model_warrior_battle_mob_wizard,base.group_user,1,1,1,1
+access_warrior_battle_mob,warrior.battle_mob,model_warrior_battle_mob,base.group_user,1,1,1,1

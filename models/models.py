@@ -223,6 +223,33 @@ class mob(models.Model):
     armadura = fields.Integer()
     zona = fields.Many2one("warrior.zona")
 
+class battle(models.Model):
+    _name = 'warrior.battle'
+    _description = 'Battle'
+
+    player1 = fields.Many2one('res.partner')
+    player2 = fields.Many2one('res.partner')
+    winner = fields.Char()
+    xp_earned = fields.Integer()
+
+class battle_mob(models.Model):
+    _name = 'warrior.battle_mob'
+    _description = "Batalla Mob"
+
+    zona = fields.Many2one('warrior.zona')
+    player = fields.Many2one('res.partner')
+    mob = fields.Many2one('warrior.mob')
+    winner = fields.Char()
+    xp_earned = fields.Integer()
+
+class battle_mob_wizard(models.TransientModel):
+    _name = 'warrior.battle_mob_wizard'
+    _description = "Wizard batalla Mob"
+
+    zona = fields.Many2one('warrior.zona')
+    player = fields.Many2one('res.partner')
+    mob = fields.Many2one('warrior.mob')
+
 
 class battle_wizard(models.TransientModel):
     _name = 'warrior.battle_wizard'
@@ -235,6 +262,7 @@ class battle_wizard(models.TransientModel):
                              default=_get_player)
     player2 = fields.Many2one('res.partner', domain="[('is_player','=',True), ('id', '!=', player1)]")
 
+
     def _get_damage(self, atacante, defensor):
         dano = random.randint(0,atacante.damage) - defensor.armadura
         if dano < 0:
@@ -246,27 +274,42 @@ class battle_wizard(models.TransientModel):
             player2 = self.player2
             player1_hp = player1.hp
             player2_hp = player2.hp
+            xp_earned = 0
+            winner = ""
             while player1_hp > 0 and player2_hp > 0:
                 # Turno de player1
                 dano = self._get_damage(player1, player2)
                 player2_hp -= dano
-                print(player2_hp)
+                print("Vida Player 2: " + str(player2_hp))
                 if player2_hp <= 0:
                     break
                 # Turno de player2
                 dano = self._get_damage(player2, player1)
                 player1_hp -= dano
-                print(player2_hp)
+                print("Vida Player 1: " + str(player1_hp))
             if player1_hp <= 0:
                 player1.comentario = '¡Perdiste!'
                 player2.xp += player1.xp/2
                 player2.comentario = '¡Ganaste!'
                 player1.xp -= player1.xp / 2
+                xp_earned = player1.xp / 2
+                winner = player2.name
             elif player2_hp <= 0:
                 player2.comentario = '¡Perdiste!'
                 player1.comentario = '¡Ganaste!'
                 player1.xp += player2.xp / 2
                 player2.xp -= player2.xp / 2
+                xp_earned = player2.xp / 2
+                winner = player1.name
 
+            print(winner)
+            print(xp_earned)
+
+            self.env['warrior.battle'].create({
+                'player1': self.player1.id,
+                'player2': self.player2.id,
+                'xp_earned': xp_earned,
+                'winner': winner,
+            })
 
 

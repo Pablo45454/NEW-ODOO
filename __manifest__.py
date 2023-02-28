@@ -34,6 +34,8 @@
         'views/zona.xml',
         'views/mob.xml',
         'views/cron.xml',
+        'views/battle.xml',
+        'views/battle_mob.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

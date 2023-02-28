@@ -40,6 +40,12 @@
       <field name="view_mode">tree,form,kanban</field>
     </record>
 
+    <record model="ir.actions.act_window" id="warrior.battle_window">
+      <field name="name">battle window</field>
+      <field name="res_model">warrior.battle</field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
+
     <!-- server action to the one above -->
 <!--
     <record model="ir.actions.server" id="warrior.action_server">
@@ -77,6 +83,8 @@
               action="warrior.zona_window"/>
     <menuitem name="Mobs" id="warrior.menu_mob" parent="warrior.menu_1"
               action="warrior.mob_window"/>
+    <menuitem name="Battles" id="warrior.menu_battle" parent="warrior.menu_1"
+              action="warrior.battle_window"/>
 <!--    <menuitem name="Server to list" id="warrior" parent="warrior.menu_2"
               action="warrior.action_server"/>
 -->

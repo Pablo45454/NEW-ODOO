@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+
+       <record model="ir.ui.view" id="warrior.battle_form">
+      <field name="name">warrior battle</field>
+      <field name="model">warrior.battle</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+          <group>
+          <field name="player1"/>
+          <field name="player2"/>
+          <field name="winner"/>
+          <field name="xp_earned"/>
+          </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="warrior.battle_tree">
+      <field name="name">warrior battle</field>
+      <field name="model">warrior.battle</field>
+      <field name="arch" type="xml">
+        <tree>
+
+
+        <field name="player1"/>
+        <field name="player2"/>
+        </tree>
+      </field>
+    </record>
+
+    </data>
+</odoo>
